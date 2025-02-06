@@ -1,0 +1,13 @@
+def template(z, y, x):
+    if z + y > x and z + x > y and y + x > z:
+        print(f"Периметр: {z + y + x}")
+
+        # Полупериметр
+
+        r = (z + y + x) / 2
+        print("Площадь:", (r * (r - z) * (r - y) * (r - x)) ** 0.5)
+        print("Равностооронний:", "да" if z == y or z == x or y == x else "нет")
+        print("Равносторонний:", "да" if z == y == x else "нет")
+        print("None")
+
+template(5, 5, 8)
