@@ -1,0 +1,25 @@
+class Chest():
+    def __init__(self, color, rule, hammer, screwdriver, nails):
+        self.__color = color
+        self.__rule = rule
+        self.__hammer = hammer
+        self.__screwdriver = screwdriver
+        self.__nails = nails
+        self.__position = False
+
+    def start(self):
+        self.__position = True
+        print('Сундук открыт')
+
+    def stop(self):
+        self.__position = False
+        print('Сундук закрыт')
+
+    def public(self):
+        print("Public method")
+
+    def _private(self):
+          print("Protected Method")
+
+    def __protected(self):
+          print("Private Method")
