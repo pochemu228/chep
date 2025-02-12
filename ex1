@@ -1,7 +1,6 @@
 class Chest():
-    def __init__(self, color, rule, hammer, screwdriver, nails):
+    def __init__(self, color, hammer, screwdriver, nails):
         self.__color = color
-        self.__rule = rule
         self.__hammer = hammer
         self.__screwdriver = screwdriver
         self.__nails = nails
@@ -16,10 +15,14 @@ class Chest():
         print('Сундук закрыт')
 
     def public(self):
-        print("Public method")
+        pass
 
     def _private(self):
-          print("Protected Method")
+        pass
 
     def __protected(self):
-          print("Private Method")
+        pass
+
+Chest = Chest('gold', 20, 15, 10)
+Chest.start()
+Chest.stop()
