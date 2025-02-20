@@ -1,57 +1,47 @@
-class Item:
+class Resource:
     def __init__(self, name):
-        self.name = name
-        
-    def get_name(self):
-        return self.name
+        self._name = name
 
-    def craft(self, other_item):
-        pass  # реализуется в подклассах
+    def name(self):
+        return self._name
 
-class Tool(Item):
-    def __init__(self, name, damage=0):
-        super().__init__(name)
-        self.damage = damage
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.name()})"
 
-    def craft(self, material1, material2=None):
-        if isinstance(material1, Material) and isinstance(material2, Material):
-            if material1.get_name() == 'Stick' and material2.get_name() == 'Stone':
-                return StoneSword()
-            return None
 
-class StoneSword(Tool):
-    def __init__(self):
-        super().__init__('Stone Sword', 5)
+class Stick(Resource):
+    pass
 
-class Material(Item):
-    def __init__(self, name, quantity=1):
-        super().__init__(name)
-        self.quantity = quantity
 
-    def use_material(self, amount):
-        if self.quantity >= amount:
-            self.quantity -= amount
-            return True
+class Stone(Resource):
+    pass
+
+
+class Sword:
+    def __init__(self, durability=100):
+        self._durability = durability
+
+    def durability(self):
+        return self._durability
+
+    def craft(self, stick, stones):
+        if isinstance(stick, Stick) and all(isinstance(s, Stone) for s in stones):
+            if len(stones) >= 2:
+                print(f"Crafted a {self.__class__.__name__}")
+                return self
         else:
-            print(f"Not enough {self.get_name()}!")
-            return False
+            raise ValueError("Invalid ingredients")
 
-class Stick(Material):
-    def __init__(self):
-        super().__init__('Stick')
+    def info(self):
+        return f"Sword with durability: {self.durability()}"
 
-class Stone(Material):
-    def __init__(self):
-        super().__init__('Stone')
+    def __repr__(self):
+        return f"{self.__class__.__name__}(durability={self.durability()})"
 
 
-
-stick = Stick()
-stone = Stone()
-tool = Tool('Basic Tool')
-
-sword = tool.craft(stick, stone)
-if sword is not None:
-    print(sword.get_name())
-else:
-    print("Craft failed")
+stick = Stick('Stick')
+stone1 = Stone('Stone')
+stone2 = Stone('Stone')
+sword = Sword()
+crafted_sword = sword.craft(stick, [stone1, stone2])
+print(crafted_sword.info())
