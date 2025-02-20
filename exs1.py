@@ -26,7 +26,7 @@ class StoneSword(Tool):
 class Material(Item):
     def __init__(self, name, quantity=1):
         super().__init__(name)
-        self.quantity = quantity  # Corrected: Assign value to self.quantity
+        self.quantity = quantity
 
     def use_material(self, amount):
         if self.quantity >= amount:
